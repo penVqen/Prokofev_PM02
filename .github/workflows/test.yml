@@ -16,10 +16,10 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore src/Floyd/Floyd.csproj
+        run: dotnet restore src/Floyd/Floyd/Floyd.csproj
 
       - name: Build
-        run: dotnet build src/Floyd/Floyd.csproj --configuration Release
+        run: dotnet build src/Floyd/Floyd/Floyd.csproj --configuration Release
 
   test:
     needs: build
