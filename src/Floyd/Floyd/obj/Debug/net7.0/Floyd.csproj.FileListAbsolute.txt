@@ -1,0 +1,15 @@
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\bin\Debug\net7.0\Floyd.exe
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\bin\Debug\net7.0\Floyd.deps.json
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\bin\Debug\net7.0\Floyd.runtimeconfig.json
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\bin\Debug\net7.0\Floyd.dll
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\bin\Debug\net7.0\Floyd.pdb
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.GeneratedMSBuildEditorConfig.editorconfig
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.AssemblyInfoInputs.cache
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.AssemblyInfo.cs
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.csproj.CoreCompileInputs.cache
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.sourcelink.json
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.dll
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\refint\Floyd.dll
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.pdb
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\Floyd.genruntimeconfig.cache
+D:\Examen\Prokofev_PM02\src\Floyd\Floyd\obj\Debug\net7.0\ref\Floyd.dll
