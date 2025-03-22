@@ -11,22 +11,38 @@ class Program
 
         if (!File.Exists(path))
         {
-            Console.WriteLine("Файл не найден");
+            Console.WriteLine("Файл не найден.");
             return;
         }
 
-        double[,] graph = LoadGraphFromFile(path);
+        double[,] graph;
+        try
+        {
+            graph = LoadGraphFromFile(path);
+        }
+        catch
+        {
+            Console.WriteLine("Ошибка при чтении файла. Проверьте формат данных.");
+            return;
+        }
+
         int size = graph.GetLength(0);
 
-        int startNode = InputVertex("начальную точку", size) - 1;
-        int endNode = InputVertex("конечную точку", size) - 1;
+        int startNode = InputVertex("начальную точку", size);
+        int endNode = InputVertex("конечную точку", size);
+
+        if (startNode == endNode)
+        {
+            Console.WriteLine("Начальная и конечная вершины не должны совпадать.");
+            return;
+        }
 
         Floyd pathFinder = new Floyd(graph);
-
         double result = pathFinder.GetShortestDistance(startNode, endNode);
+
         if (double.IsInfinity(result))
         {
-            Console.WriteLine("Путь не существует");
+            Console.WriteLine("Путь не существует.");
         }
         else
         {
@@ -37,15 +53,15 @@ class Program
 
     static double[,] LoadGraphFromFile(string filePath)
     {
-        var lines = File.ReadAllLines(filePath);
+        string[] lines = File.ReadAllLines(filePath);
         int size = int.Parse(lines[0]);
-        var matrix = new double[size, size];
+        double[,] matrix = new double[size, size];
 
         for (int i = 0; i < size; i++)
         {
-            var values = lines[i + 1]
+            string[] values = lines[i + 1]
                 .Trim('{', '}', ' ')
-                .Split(',');
+                .Split(',', StringSplitOptions.RemoveEmptyEntries);
 
             for (int j = 0; j < size; j++)
             {
@@ -60,14 +76,14 @@ class Program
     static int InputVertex(string label, int max)
     {
         int value = -1;
-        while (value < 1 || value > max)
+        while (true)
         {
-            Console.WriteLine($"Введите {label} (1-{max}): ");
-            if (int.TryParse(Console.ReadLine(), out value) && value >= 1 && value <= max)
-                return value;
+            Console.WriteLine($"Введите {label} (1-{max}):");
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out value) && value >= 1 && value <= max)
+                return value - 1;
 
-            Console.WriteLine("Некорректный ввод");
+            Console.WriteLine("Некорректный ввод. Введите число в допустимом диапазоне.");
         }
-        return value;
     }
 }
