@@ -11,38 +11,28 @@ class Program
 
         if (!File.Exists(path))
         {
-            Console.WriteLine("Файл не найден.");
+            Console.WriteLine("Файл не найден");
             return;
         }
 
-        double[,] graph;
-        try
-        {
-            graph = LoadGraphFromFile(path);
-        }
-        catch
-        {
-            Console.WriteLine("Ошибка при чтении файла. Проверьте формат данных.");
-            return;
-        }
-
+        double[,] graph = LoadGraphFromFile(path);
         int size = graph.GetLength(0);
 
-        int startNode = InputVertex("начальную точку", size);
-        int endNode = InputVertex("конечную точку", size);
+        int startNode = InputVertex("начальную точку", size) - 1;
+        int endNode = InputVertex("конечную точку", size) - 1;
 
         if (startNode == endNode)
         {
-            Console.WriteLine("Начальная и конечная вершины не должны совпадать.");
+            Console.WriteLine("Начальная и конечная точки совпадают.");
             return;
         }
 
         Floyd pathFinder = new Floyd(graph);
         double result = pathFinder.GetShortestDistance(startNode, endNode);
 
-        if (double.IsInfinity(result))
+        if (result == 0)
         {
-            Console.WriteLine("Путь не существует.");
+            Console.WriteLine("Путь не существует");
         }
         else
         {
@@ -53,20 +43,20 @@ class Program
 
     static double[,] LoadGraphFromFile(string filePath)
     {
-        string[] lines = File.ReadAllLines(filePath);
+        var lines = File.ReadAllLines(filePath);
         int size = int.Parse(lines[0]);
-        double[,] matrix = new double[size, size];
+        var matrix = new double[size, size];
 
         for (int i = 0; i < size; i++)
         {
-            string[] values = lines[i + 1]
+            var values = lines[i + 1]
                 .Trim('{', '}', ' ')
-                .Split(',', StringSplitOptions.RemoveEmptyEntries);
+                .Split(',');
 
             for (int j = 0; j < size; j++)
             {
                 double value = double.Parse(values[j].Trim(), CultureInfo.InvariantCulture);
-                matrix[i, j] = (i != j && value == 0) ? double.PositiveInfinity : value;
+                matrix[i, j] = value;
             }
         }
 
@@ -76,14 +66,14 @@ class Program
     static int InputVertex(string label, int max)
     {
         int value = -1;
-        while (true)
+        while (value < 1 || value > max)
         {
-            Console.WriteLine($"Введите {label} (1-{max}):");
-            string input = Console.ReadLine();
-            if (int.TryParse(input, out value) && value >= 1 && value <= max)
-                return value - 1;
+            Console.WriteLine($"Введите {label} (1-{max}): ");
+            if (int.TryParse(Console.ReadLine(), out value) && value >= 1 && value <= max)
+                return value;
 
-            Console.WriteLine("Некорректный ввод. Введите число в допустимом диапазоне.");
+            Console.WriteLine("Некорректный ввод");
         }
+        return value;
     }
 }

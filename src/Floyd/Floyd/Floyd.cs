@@ -13,8 +13,12 @@ public class Floyd
         route = new int[size, size];
 
         for (int i = 0; i < size; i++)
+        {
             for (int j = 0; j < size; j++)
-                route[i, j] = (!double.IsInfinity(shortestPaths[i, j]) && i != j) ? j : -1;
+            {
+                route[i, j] = (graph[i, j] != 0 && i != j) ? j : -1;
+            }
+        }
 
         ComputePaths();
     }
@@ -22,13 +26,23 @@ public class Floyd
     private void ComputePaths()
     {
         for (int k = 0; k < size; k++)
+        {
             for (int i = 0; i < size; i++)
+            {
                 for (int j = 0; j < size; j++)
-                    if (shortestPaths[i, k] + shortestPaths[k, j] < shortestPaths[i, j])
+                {
+                    if (i != j && shortestPaths[i, k] > 0 && shortestPaths[k, j] > 0)
                     {
-                        shortestPaths[i, j] = shortestPaths[i, k] + shortestPaths[k, j];
-                        route[i, j] = route[i, k];
+                        double newDist = shortestPaths[i, k] + shortestPaths[k, j];
+                        if (shortestPaths[i, j] == 0 || newDist < shortestPaths[i, j])
+                        {
+                            shortestPaths[i, j] = newDist;
+                            route[i, j] = route[i, k];
+                        }
                     }
+                }
+            }
+        }
     }
 
     public double GetShortestDistance(int from, int to)
